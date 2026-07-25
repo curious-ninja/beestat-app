@@ -64,6 +64,15 @@ beestat.layer.detail.prototype.decorate_ = function(parent) {
     ]);
   }
 
+  if (beestat.component.card.songstead_promo.should_show() === true) {
+    cards.push([
+      {
+        'card': new beestat.component.card.songstead_promo(),
+        'size': 12
+      }
+    ]);
+  }
+
   cards.push([
     {
       'card': new beestat.component.card.runtime_thermostat_detail(

@@ -111,6 +111,7 @@ if($setting->get('environment') === 'dev' || $setting->get('environment') === 'd
   echo '<script src="/js/component/card/visualize_video.js"></script>' . PHP_EOL;
   echo '<script src="/js/component/card/rate_app_reminder.js"></script>' . PHP_EOL;
   echo '<script src="/js/component/card/rookstack_survey_notification.js"></script>' . PHP_EOL;
+  echo '<script src="/js/component/card/songstead_promo.js"></script>' . PHP_EOL;
   echo '<script src="/js/component/card/glenwood_terms.js"></script>' . PHP_EOL;
   echo '<script src="/js/component/card/glenwood_enroll.js"></script>' . PHP_EOL;
   echo '<script src="/js/component/card/glenwood_report.js"></script>' . PHP_EOL;
