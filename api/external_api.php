@@ -60,6 +60,13 @@ class external_api extends cora\api {
     curl_setopt($curl_handle, CURLOPT_TIMEOUT, 60);
     curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, true);
 
+    // Optionally force IPv4. A hostname that resolves to an unreachable IPv6
+    // address inside a container (e.g. a self-hosted bridge reached by mDNS
+    // name) otherwise fails with "connection reset by peer". Off by default.
+    if($this->setting->get('external_api_ipv4_only') === true) {
+      curl_setopt($curl_handle, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+    }
+
     if(isset($arguments['method']) === true && $arguments['method'] === 'POST') {
       curl_setopt($curl_handle, CURLOPT_POST, true);
     }
