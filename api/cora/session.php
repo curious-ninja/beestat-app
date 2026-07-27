@@ -281,6 +281,19 @@ final class session {
     );
     $domain = $matches[1];
 
+    // Self-hosting: the cookie Domain attribute must be a bare hostname. Strip
+    // any port, and omit the attribute entirely for values that cannot be a
+    // cookie domain (a port-bearing host, an IP address, or a single-label
+    // name such as "localhost") so the cookie is set host-only instead of
+    // failing. Public hostnames with a dot and no port are unchanged.
+    $domain = preg_replace('/:\d+$/', '', $domain);
+    if(
+      filter_var($domain, FILTER_VALIDATE_IP) !== false ||
+      strpos($domain, '.') === false
+    ) {
+      $domain = '';
+    }
+
     $cookie_success = setcookie(
       $name,
       $value,

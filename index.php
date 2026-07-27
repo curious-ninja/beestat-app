@@ -26,7 +26,10 @@
     if (isset($_SERVER['REQUEST_URI']) && stripos($_SERVER['REQUEST_URI'], '/glenwood') !== false) {
       $arguments['redirect'] = 'glenwood';
     }
-    header('Location: https://' . $_SERVER['HTTP_HOST'] . '/api/?resource=ecobee&method=authorize&arguments=' . urlencode(json_encode($arguments)) . '&api_key=' . $setting->get('beestat_api_key_local'));
+    // Use the configured root URI rather than $_SERVER['HTTP_HOST'] so the
+    // redirect target is deterministic (correct host, port, and scheme) even
+    // when the app is reached through a proxy or without an explicit port.
+    header('Location: ' . $setting->get('beestat_root_uri') . 'api/?resource=ecobee&method=authorize&arguments=' . urlencode(json_encode($arguments)) . '&api_key=' . $setting->get('beestat_api_key_local'));
     die();
   }
 
