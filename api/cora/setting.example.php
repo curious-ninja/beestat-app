@@ -79,6 +79,23 @@ final class setting {
     'ecobee_client_id' => '',
 
     /**
+     * Base URL for the ecobee API, without a trailing slash. Point this at an
+     * ecobee-compatible emulator (e.g. beestat-bridge) to run beestat without
+     * ecobee cloud access.
+     *
+     * Example: https://api.ecobee.com
+     */
+    'ecobee_api_base_url' => 'https://api.ecobee.com',
+
+    /**
+     * Force server-to-server external API (ecobee) cURL calls to resolve over
+     * IPv4 only. Useful when ecobee_api_base_url is a hostname that resolves to
+     * an unreachable IPv6 address inside a container (e.g. a self-hosted bridge
+     * reached by mDNS name). Default false preserves upstream behavior.
+     */
+    'external_api_ipv4_only' => false,
+
+    /**
      * URI to redirect to after you authorize your app to access your ecobee
      * account. Set this here and when creating your ecobee app.
      *

@@ -40,7 +40,7 @@ class ecobee extends external_api {
     if ($redirect !== null) {
       $state = '&state=' . base64url_encode(json_encode(['redirect' => $redirect]));
     }
-    header('Location: https://api.ecobee.com/authorize?response_type=code&client_id=' . $this->setting->get('ecobee_client_id') . '&redirect_uri=' . $this->setting->get('ecobee_redirect_uri') . '&scope=smartRead' . $state);
+    header('Location: ' . $this->setting->get('ecobee_api_base_url') . '/authorize?response_type=code&client_id=' . $this->setting->get('ecobee_client_id') . '&redirect_uri=' . $this->setting->get('ecobee_redirect_uri') . '&scope=smartRead' . $state);
   }
 
   /**
@@ -186,7 +186,7 @@ class ecobee extends external_api {
     else {
       $full_endpoint = '/' . $full_endpoint;
     }
-    $curl['url'] = 'https://api.ecobee.com' . $full_endpoint;
+    $curl['url'] = $this->setting->get('ecobee_api_base_url') . $full_endpoint;
 
     // Allow a completely custom endpoint if desired.
     if(str_starts_with($endpoint, 'https://') === true) {
